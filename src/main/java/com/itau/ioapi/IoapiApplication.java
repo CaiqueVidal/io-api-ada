@@ -30,14 +30,9 @@ public class IoapiApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Path path = Paths.get(HOME_DIR, "/mapas/mapa-virgulas.txt");
-
-        // Desserializa o arquivo
         List<Pessoa> pessoas = pessoaFileSystemService.desserialize(path);
-
-        // Imprime as informaçoes no console
         pessoas.forEach(signosService::imprimirInformacoesSignos);
 
-        // Serializa o mapa quantico de cada pessoa
         pessoas.stream()
                 .parallel()
                 .map(signosService::getInformacoesSignosEmString)
